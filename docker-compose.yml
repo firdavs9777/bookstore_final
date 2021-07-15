@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    command: python /code/manage.py runserver 0.0.0.0:8000
+    environment:
+      - DJANGO_SECRET_KEY=welcomebackagain
+      - DEBUG=True
+      - STRIPE_TEST_PUBLISHABLE_KEY=pk_test_51JCbXsIviAc4cfHMJGyAFDVjvrt1qfkscGSFZgAh8PhZMDeznc1CYtmR95P6Zh5V4FBfby5fIrvQhruRXBHi0suz00JZjU8yOp
+      - STRIPE_TEST_SECRET_KEY=sk_test_51JCbXsIviAc4cfHMKqwydB3MvWNeu5DRt6FEwWx0Kxx16vVJhAsiiHjj1se28COESEkDvgtj3Qiz1cMMIlBorE0000Rqsroym7
+    volumes:
+      - .:/code
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+  db:
+    image: postgres:11
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
+
+volumes:
+  postgres_data:
