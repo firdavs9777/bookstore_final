@@ -11,6 +11,7 @@
   </form>
   {% if user.is_authenticated %}
     <p>Hi {{ user.email }}!</p>
+    <p><a style="color:'red'" href="{% url 'orders' %}">Order books here</a>
     <p><a href="{% url 'account_logout' %}">Log Out</a></p>
   {% else %}
     <p>You are not logged in</p>
